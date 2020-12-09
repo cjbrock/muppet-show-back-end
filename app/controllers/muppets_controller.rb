@@ -3,9 +3,13 @@ class MuppetsController < ApplicationController
 
   # GET /muppets
   def index
-    @muppets = Muppet.all
-
-    render json: @muppets
+    if params[:show_id]
+      @show = Show.find(params[:show_id])
+      @muppets = @show.muppets
+    else
+      @muppets = Muppet.all
+    end
+      render json: @muppets
   end
 
   # GET /muppets/1
