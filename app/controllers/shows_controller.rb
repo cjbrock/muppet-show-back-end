@@ -3,7 +3,12 @@ class ShowsController < ApplicationController
 
   # GET /shows
   def index
-    @shows = Show.all
+    if params[:show_id]
+      @show = Show.find(params[:show_id])
+      @shows = @show.muppets
+    else
+      @shows = Show.all
+    end
 
     render json: @shows
   end
